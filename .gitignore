@@ -80,3 +80,9 @@ memory/test_credentials.md
 
 # Mobile development
 android-sdk/
+# Environment files
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env

@@ -156,25 +156,25 @@ const ProfitTargets = () => {
   });
 
   return (
-    <section id="analysis" className="relative py-20 md:py-28">
+    <section id="analysis" className="relative py-16 sm:py-20 md:py-28">
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-teal-50/40 to-white" />
-      <div className="max-w-7xl mx-auto px-5 md:px-8">
-        <Reveal className="text-center mb-12 md:mb-16">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-100/70 border border-teal-200 text-teal-700 text-xs md:text-sm font-semibold">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 md:px-8">
+        <Reveal className="text-center mb-10 md:mb-14">
+          <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-teal-100/70 border border-teal-200 text-teal-700 text-xs md:text-sm font-semibold">
             <Target className="w-3.5 h-3.5" /> Profit Planning
           </span>
-          <h2 className="mt-4 text-3xl md:text-5xl font-bold tracking-tight text-slate-900">
+          <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
             Potential <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">Profit Targets</span>
           </h2>
-          <p className="mt-3 text-slate-500 max-w-2xl mx-auto text-base md:text-lg">
+          <p className="mt-3 text-slate-500 max-w-2xl mx-auto text-sm sm:text-base md:text-lg px-2">
             Set your risk-reward ratio and discover optimal profit targets for your trades.
           </p>
         </Reveal>
 
-        <div className="grid lg:grid-cols-12 gap-6 items-stretch">
+        <div className="grid lg:grid-cols-12 gap-5 md:gap-6 items-stretch">
           {/* LEFT - Params + RR + Visualizer */}
           <Reveal className="lg:col-span-5" delay={80}>
-            <div className="h-full rounded-3xl bg-white border border-slate-100 shadow-[0_8px_40px_-20px_rgba(13,148,136,0.25)] p-6 md:p-7 flex flex-col">
+            <div className="h-full rounded-2xl md:rounded-3xl bg-white border border-slate-100 shadow-[0_8px_40px_-20px_rgba(13,148,136,0.25)] p-5 sm:p-6 md:p-7 flex flex-col">
               <h3 className="text-lg font-bold text-slate-900 mb-5">Trade Parameters</h3>
               <div className="space-y-4">
                 <div>
@@ -229,7 +229,7 @@ const ProfitTargets = () => {
           </Reveal>
 
           {/* RIGHT - Targets + Summary */}
-          <div className="lg:col-span-7 flex flex-col">
+          <div className="lg:col-span-7 flex flex-col gap-5 md:gap-6">
             <div className="grid sm:grid-cols-2 gap-4 md:gap-5 auto-rows-fr">
               {targets.map((t, i) => (
                 <TargetCard
@@ -245,8 +245,8 @@ const ProfitTargets = () => {
               ))}
             </div>
 
-            <Reveal delay={400} className="mt-6 flex-1">
-              <div className="h-full rounded-3xl bg-white border border-slate-100 shadow-[0_8px_40px_-20px_rgba(13,148,136,0.25)] p-6 md:p-7 flex flex-col">
+            <Reveal delay={400} className="flex-1">
+              <div className="h-full rounded-2xl md:rounded-3xl bg-white border border-slate-100 shadow-[0_8px_40px_-20px_rgba(13,148,136,0.25)] p-5 sm:p-6 md:p-7 flex flex-col">
                 <h3 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
                   <span className="h-7 w-7 rounded-lg bg-emerald-100 text-emerald-700 grid place-items-center">
                     <BarChart3 className="w-4 h-4" />

@@ -42,7 +42,7 @@ const StepRow = ({ n, title, expression, value, accent }) => (
     </div>
     <div className="flex-1 min-w-0">
       <div className="text-sm font-semibold text-slate-800">{title}</div>
-      <div className="text-xs text-slate-500 tabular-nums truncate">{expression}</div>
+      <div className="text-[11px] md:text-xs text-slate-500 tabular-nums truncate">{expression}</div>
     </div>
     <div className="text-right font-bold text-slate-900 tabular-nums whitespace-nowrap text-sm md:text-base">{value}</div>
   </div>
@@ -55,13 +55,13 @@ const StatTile = ({ label, value, tone, icon: Icon }) => {
     slate: 'text-slate-700 bg-slate-50 border-slate-100',
   };
   return (
-    <div className={cn('flex-1 rounded-2xl border px-4 py-3 md:py-4 flex items-center gap-3 transition-all hover:-translate-y-0.5 hover:shadow-sm', tones[tone])}>
-      <div className="h-9 w-9 rounded-xl bg-white/80 grid place-items-center shadow-sm">
-        <Icon className="w-4.5 h-4.5" />
+    <div className={cn('rounded-2xl border px-3 py-3 sm:px-4 sm:py-4 flex items-center gap-2.5 sm:gap-3 transition-all hover:-translate-y-0.5 hover:shadow-sm min-w-0', tones[tone])}>
+      <div className="h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 rounded-xl bg-white/80 grid place-items-center shadow-sm">
+        <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
       </div>
-      <div className="min-w-0">
-        <div className="text-[10px] md:text-[11px] uppercase tracking-wider font-bold opacity-80">{label}</div>
-        <div className="text-base md:text-lg font-extrabold tabular-nums truncate">{value}</div>
+      <div className="min-w-0 flex-1">
+        <div className="text-[10px] sm:text-[11px] uppercase tracking-wider font-bold opacity-80 leading-tight">{label}</div>
+        <div className="text-base sm:text-lg font-extrabold tabular-nums truncate leading-tight mt-0.5">{value}</div>
       </div>
     </div>
   );
@@ -71,11 +71,10 @@ const Calculator = () => {
   const [portfolioSize, setPortfolioSize] = React.useState(DEFAULT_VALUES.portfolioSize);
   const [riskPercent, setRiskPercent] = React.useState(DEFAULT_VALUES.riskPercent);
   const [entryPrice, setEntryPrice] = React.useState(DEFAULT_VALUES.entryPrice);
-  const [mode, setMode] = React.useState('price'); // 'price' | 'percent'
+  const [mode, setMode] = React.useState('price');
   const [stopLossPrice, setStopLossPrice] = React.useState(DEFAULT_VALUES.stopLossPrice);
   const [stopLossPercent, setStopLossPercent] = React.useState(DEFAULT_VALUES.stopLossPercent);
 
-  // Sync price <-> percent when entry changes
   React.useEffect(() => {
     if (entryPrice && entryPrice > 0) {
       if (mode === 'price' && stopLossPrice !== null && stopLossPrice > 0) {
@@ -109,7 +108,6 @@ const Calculator = () => {
     }
   };
 
-  // Validation
   const errors = {
     portfolioSize: portfolioSize !== null && portfolioSize <= 0 ? 'Portfolio size must be greater than 0' : '',
     riskPercent:
@@ -144,7 +142,7 @@ const Calculator = () => {
   const overInvested = investment > (portfolioSize || 0);
 
   const utilMsg = overInvested
-    ? `Reduce your Risk Boundary (%) so that your Investment Amount [${formatINR(investment)}] does not exceed Funds Available [${formatINR(portfolioSize || 0)}].`
+    ? `Reduce your risk % so that your Investment Amount [${formatINR(investment)}] does not exceed your Portfolio Size [${formatINR(portfolioSize || 0)}].`
     : utilization > 75
     ? 'High capital utilization. Consider reducing position size.'
     : utilization > 50
@@ -153,7 +151,6 @@ const Calculator = () => {
     ? 'Healthy capital utilization. Stick to your plan.'
     : 'Enter valid inputs to see results.';
 
-  // Donut segments
   const segments = [
     {
       key: 'invested',
@@ -182,27 +179,27 @@ const Calculator = () => {
   ];
 
   return (
-    <section id="calculator" className="relative py-20 md:py-28">
+    <section id="calculator" className="relative py-16 sm:py-20 md:py-28">
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-emerald-50/30 to-white" />
-      <div className="max-w-7xl mx-auto px-5 md:px-8">
-        <Reveal className="text-center mb-12 md:mb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 md:px-8">
+        <Reveal className="text-center mb-10 md:mb-14">
           <Pill className="bg-emerald-100/70 border border-emerald-200 text-emerald-700">
             <Sparkles className="w-3.5 h-3.5" /> Position Sizing
           </Pill>
-          <h2 className="mt-4 text-3xl md:text-5xl font-bold tracking-tight text-slate-900">
+          <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
             Position Size <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">Calculator</span>
           </h2>
-          <p className="mt-3 text-slate-500 max-w-2xl mx-auto text-base md:text-lg">
+          <p className="mt-3 text-slate-500 max-w-2xl mx-auto text-sm sm:text-base md:text-lg px-2">
             Enter your trading parameters below and get instant calculations for optimal position sizing.
           </p>
         </Reveal>
 
-        <div className="grid lg:grid-cols-12 gap-6 items-stretch">
+        <div className="grid lg:grid-cols-12 gap-5 md:gap-6 items-stretch">
           {/* INPUTS */}
           <Reveal className="lg:col-span-5" delay={80}>
-            <div className="h-full rounded-3xl bg-white border border-slate-100 shadow-[0_8px_40px_-20px_rgba(13,148,136,0.25)] p-6 md:p-8 flex flex-col">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-bold text-slate-900">Trading Parameters</h3>
+            <div className="h-full rounded-2xl md:rounded-3xl bg-white border border-slate-100 shadow-[0_8px_40px_-20px_rgba(13,148,136,0.25)] p-5 sm:p-6 md:p-8 flex flex-col">
+              <div className="flex items-center justify-between mb-5">
+                <h3 className="text-base sm:text-lg font-bold text-slate-900">Trading Parameters</h3>
                 <Pill className="bg-emerald-50 text-emerald-700 border border-emerald-100">
                   <Coins className="w-3.5 h-3.5" /> INR ₹
                 </Pill>
@@ -222,7 +219,7 @@ const Calculator = () => {
                 </Field>
 
                 <div className="mt-1">
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
                     <label className="flex items-center gap-2 text-sm font-semibold text-slate-700">
                       <ShieldAlert className="w-4 h-4 text-emerald-600" />
                       Stop Loss
@@ -231,7 +228,7 @@ const Calculator = () => {
                       <button
                         onClick={() => setMode('price')}
                         className={cn(
-                          'px-3 py-1.5 text-xs font-semibold rounded-lg transition-all',
+                          'px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-semibold rounded-lg transition-all',
                           mode === 'price' ? 'bg-white text-emerald-700 shadow' : 'text-slate-500 hover:text-slate-700'
                         )}
                       >
@@ -240,7 +237,7 @@ const Calculator = () => {
                       <button
                         onClick={() => setMode('percent')}
                         className={cn(
-                          'px-3 py-1.5 text-xs font-semibold rounded-lg transition-all',
+                          'px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-semibold rounded-lg transition-all',
                           mode === 'percent' ? 'bg-white text-emerald-700 shadow' : 'text-slate-500 hover:text-slate-700'
                         )}
                       >
@@ -259,55 +256,15 @@ const Calculator = () => {
                     </Field>
                   )}
 
-                  <div className="mt-2 flex items-center justify-between rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100 px-4 py-3">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-emerald-700 flex items-center gap-1.5">
-                      <TrendingDown className="w-3.5 h-3.5" />
-                      Stop Loss Distance
+                  <div className="mt-2 flex items-center justify-between rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100 px-3 sm:px-4 py-3 gap-2">
+                    <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-emerald-700 flex items-center gap-1.5 min-w-0">
+                      <TrendingDown className="w-3.5 h-3.5 flex-shrink-0" />
+                      <span className="truncate">SL Distance</span>
                     </span>
-                    <span className="text-sm font-bold text-emerald-700 tabular-nums">
+                    <span className="text-xs sm:text-sm font-bold text-emerald-700 tabular-nums whitespace-nowrap">
                       {formatINR(slDistance, { decimals: 2 })} ({formatPercent(slPercent)})
                     </span>
                   </div>
-                </div>
-              </div>
-
-              {/* Calculation Steps inline in left to balance heights */}
-              <div className="mt-6 pt-6 border-t border-slate-100">
-                <h4 className="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
-                  <span className="h-6 w-6 rounded-lg bg-emerald-100 text-emerald-700 grid place-items-center">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                  </span>
-                  Calculation Steps
-                </h4>
-                <div className="space-y-2">
-                  <StepRow
-                    n={1}
-                    title="Risk Amount"
-                    expression={`${formatINR(portfolioSize || 0)} × ${formatPercent(riskPercent || 0)}`}
-                    value={<AnimatedNumber value={riskAmount} decimals={0} prefix="₹" />}
-                    accent="bg-emerald-500"
-                  />
-                  <StepRow
-                    n={2}
-                    title="Risk Per Share"
-                    expression={`${formatINR(entryPrice || 0, { decimals: 2 })} − ${formatINR(stopLossPrice || 0, { decimals: 2 })}`}
-                    value={<AnimatedNumber value={riskPerShare} decimals={2} prefix="₹" />}
-                    accent="bg-teal-500"
-                  />
-                  <StepRow
-                    n={3}
-                    title="Quantity"
-                    expression={`${formatINR(riskAmount, { decimals: 0 })} ÷ ${formatINR(riskPerShare, { decimals: 2 })}`}
-                    value={<AnimatedNumber value={quantity} decimals={0} suffix=" shares" />}
-                    accent="bg-emerald-600"
-                  />
-                  <StepRow
-                    n={4}
-                    title="Investment Amount"
-                    expression={`${quantity} × ${formatINR(entryPrice || 0, { decimals: 2 })}`}
-                    value={<AnimatedNumber value={investment} decimals={0} prefix="₹" />}
-                    accent="bg-teal-600"
-                  />
                 </div>
               </div>
             </div>
@@ -315,17 +272,16 @@ const Calculator = () => {
 
           {/* OUTPUTS - Donut Chart + Stats */}
           <Reveal className="lg:col-span-7" delay={140}>
-            <div className="h-full rounded-3xl bg-white border border-slate-100 shadow-[0_8px_40px_-20px_rgba(13,148,136,0.25)] p-6 md:p-8 flex flex-col">
-              {/* Header */}
-              <div className="flex items-center justify-between mb-5">
-                <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+            <div className="h-full rounded-2xl md:rounded-3xl bg-white border border-slate-100 shadow-[0_8px_40px_-20px_rgba(13,148,136,0.25)] p-5 sm:p-6 md:p-8 flex flex-col">
+              <div className="flex items-center justify-between mb-5 flex-wrap gap-2">
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
                   <span className="h-7 w-7 rounded-lg bg-emerald-100 text-emerald-700 grid place-items-center">
                     <Activity className="w-4 h-4" />
                   </span>
                   Investment Snapshot
                 </h3>
                 <Pill className={cn(
-                  'border',
+                  'border whitespace-nowrap',
                   overInvested ? 'bg-rose-50 text-rose-700 border-rose-100' :
                   utilization > 75 ? 'bg-amber-50 text-amber-700 border-amber-100' :
                   'bg-emerald-50 text-emerald-700 border-emerald-100'
@@ -335,8 +291,8 @@ const Calculator = () => {
                 </Pill>
               </div>
 
-              {/* Top stat tiles */}
-              <div className="grid grid-cols-3 gap-3 md:gap-4">
+              {/* Stat tiles - 1 col on mobile, 3 col on sm+ */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 md:gap-4">
                 <StatTile
                   label="Investment Amount"
                   icon={IndianRupee}
@@ -357,25 +313,18 @@ const Calculator = () => {
                 />
               </div>
 
-              {/* Chart */}
+              {/* Chart - responsive size */}
               <div className="mt-6 flex flex-col items-center justify-center flex-1">
-                <DonutChart
+                <ResponsiveDonut
                   segments={segments}
-                  size={260}
-                  thickness={28}
-                  centerLabel="Investment"
-                  centerValue={
-                    <AnimatedNumber value={investment} prefix="₹" />
-                  }
-                  centerSub={
-                    isValid ? `${formatPercent(utilization, 1)} of capital` : 'Enter inputs to begin'
-                  }
+                  investment={investment}
+                  utilization={utilization}
+                  isValid={isValid}
                 />
               </div>
 
-              {/* Footer message */}
               <div className={cn(
-                'mt-5 flex items-start gap-2 rounded-xl px-4 py-3 text-sm font-medium border',
+                'mt-5 flex items-start gap-2 rounded-xl px-3 sm:px-4 py-3 text-xs sm:text-sm font-medium border',
                 overInvested ? 'bg-rose-50 text-rose-700 border-rose-100' :
                 utilization > 75 ? 'bg-amber-50 text-amber-700 border-amber-100' :
                 utilization > 50 ? 'bg-emerald-50 text-emerald-700 border-emerald-100' :
@@ -391,8 +340,83 @@ const Calculator = () => {
             </div>
           </Reveal>
         </div>
+
+        {/* Calculation Steps - full width below the grid */}
+        <Reveal className="mt-5 md:mt-6" delay={120}>
+          <div className="rounded-2xl md:rounded-3xl bg-white border border-slate-100 shadow-[0_8px_40px_-20px_rgba(13,148,136,0.25)] p-5 sm:p-6 md:p-8">
+            <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-4 sm:mb-5 flex items-center gap-2">
+              <span className="h-7 w-7 rounded-lg bg-emerald-100 text-emerald-700 grid place-items-center">
+                <CheckCircle2 className="w-4 h-4" />
+              </span>
+              Calculation Steps
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-2.5 sm:gap-3">
+              <StepRow
+                n={1}
+                title="Risk Amount"
+                expression={`${formatINR(portfolioSize || 0)} × ${formatPercent(riskPercent || 0)}`}
+                value={<AnimatedNumber value={riskAmount} decimals={0} prefix="₹" />}
+                accent="bg-emerald-500"
+              />
+              <StepRow
+                n={2}
+                title="Risk Per Share"
+                expression={`${formatINR(entryPrice || 0, { decimals: 2 })} − ${formatINR(stopLossPrice || 0, { decimals: 2 })}`}
+                value={<AnimatedNumber value={riskPerShare} decimals={2} prefix="₹" />}
+                accent="bg-teal-500"
+              />
+              <StepRow
+                n={3}
+                title="Quantity"
+                expression={`${formatINR(riskAmount, { decimals: 0 })} ÷ ${formatINR(riskPerShare, { decimals: 2 })}`}
+                value={<AnimatedNumber value={quantity} decimals={0} suffix=" shares" />}
+                accent="bg-emerald-600"
+              />
+              <StepRow
+                n={4}
+                title="Investment Amount"
+                expression={`${quantity} × ${formatINR(entryPrice || 0, { decimals: 2 })}`}
+                value={<AnimatedNumber value={investment} decimals={0} prefix="₹" />}
+                accent="bg-teal-600"
+              />
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
+  );
+};
+
+// Responsive donut wrapper that adjusts size based on container width
+const ResponsiveDonut = ({ segments, investment, utilization, isValid }) => {
+  const [size, setSize] = React.useState(240);
+  const wrapperRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const handle = () => {
+      const w = window.innerWidth;
+      if (w < 380) setSize(180);
+      else if (w < 480) setSize(210);
+      else if (w < 768) setSize(230);
+      else if (w < 1024) setSize(250);
+      else setSize(260);
+    };
+    handle();
+    window.addEventListener('resize', handle);
+    return () => window.removeEventListener('resize', handle);
+  }, []);
+
+  return (
+    <div ref={wrapperRef} className="w-full flex justify-center">
+      <DonutChart
+        segments={segments}
+        size={size}
+        thickness={Math.max(20, Math.round(size * 0.11))}
+        centerLabel="Investment"
+        centerValue={<AnimatedNumber value={investment} prefix="₹" />}
+        centerSub={isValid ? `${formatPercent(utilization, 1)} of capital` : 'Enter inputs to begin'}
+      />
+    </div>
   );
 };
 
