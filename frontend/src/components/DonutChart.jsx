@@ -63,67 +63,66 @@ const DonutChart = ({
 
   return (
     <div className="relative inline-flex flex-col items-center select-none">
-      <svg
-        width={size}
-        height={size}
-        viewBox={`0 0 ${size} ${size}`}
-        className="drop-shadow-[0_8px_24px_rgba(13,148,136,0.18)]"
-      >
-        <defs>
-          {segments.map((s) => (
-            <linearGradient id={`grad-${s.key}`} key={`grad-${s.key}`} x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%" stopColor={s.colorFrom || s.color} />
-              <stop offset="100%" stopColor={s.colorTo || s.color} />
-            </linearGradient>
-          ))}
-        </defs>
+      <div className="relative" style={{ width: size, height: size }}>
+        <svg
+          width={size}
+          height={size}
+          viewBox={`0 0 ${size} ${size}`}
+          className="drop-shadow-[0_8px_24px_rgba(13,148,136,0.18)]"
+        >
+          <defs>
+            {segments.map((s) => (
+              <linearGradient id={`grad-${s.key}`} key={`grad-${s.key}`} x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stopColor={s.colorFrom || s.color} />
+                <stop offset="100%" stopColor={s.colorTo || s.color} />
+              </linearGradient>
+            ))}
+          </defs>
 
-        {/* Track */}
-        <circle cx={cx} cy={cy} r={r} fill="none" stroke="#f1f5f9" strokeWidth={thickness} />
+          {/* Track */}
+          <circle cx={cx} cy={cy} r={r} fill="none" stroke="#f1f5f9" strokeWidth={thickness} />
 
-        {/* Arcs */}
-        {arcs.map((a) => {
-          if (a.endAngle - a.startAngle < 0.0001) return null;
-          // Avoid full-circle as path issue
-          const ea = Math.min(a.endAngle, a.startAngle + 359.999);
-          const isHover = hovered === a.key;
-          return (
-            <path
-              key={a.key}
-              d={describeArc(cx, cy, r, a.startAngle, ea)}
-              fill="none"
-              stroke={`url(#grad-${a.key})`}
-              strokeWidth={isHover ? thickness + 6 : thickness}
-              strokeLinecap="round"
-              onMouseEnter={() => setHovered(a.key)}
-              onMouseLeave={() => setHovered(null)}
-              style={{
-                transition: 'stroke-width 220ms ease',
-                cursor: 'pointer',
-                filter: isHover ? 'brightness(1.05)' : 'none',
-              }}
-            />
-          );
-        })}
-      </svg>
+          {/* Arcs */}
+          {arcs.map((a) => {
+            if (a.endAngle - a.startAngle < 0.0001) return null;
+            // Avoid full-circle as path issue
+            const ea = Math.min(a.endAngle, a.startAngle + 359.999);
+            const isHover = hovered === a.key;
+            return (
+              <path
+                key={a.key}
+                d={describeArc(cx, cy, r, a.startAngle, ea)}
+                fill="none"
+                stroke={`url(#grad-${a.key})`}
+                strokeWidth={isHover ? thickness + 6 : thickness}
+                strokeLinecap="round"
+                onMouseEnter={() => setHovered(a.key)}
+                onMouseLeave={() => setHovered(null)}
+                style={{
+                  transition: 'stroke-width 220ms ease',
+                  cursor: 'pointer',
+                  filter: isHover ? 'brightness(1.05)' : 'none',
+                }}
+              />
+            );
+          })}
+        </svg>
 
-      {/* Center label */}
-      <div
-        className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
-        style={{ width: size, height: size }}
-      >
-        <div className="text-[11px] font-bold uppercase tracking-widest text-slate-500">
-          {hovered ? segments.find((s) => s.key === hovered)?.label : centerLabel}
-        </div>
-        <div className="mt-1 text-2xl md:text-3xl font-extrabold text-slate-900 tabular-nums">
-          {hovered
-            ? formatAuto(segments.find((s) => s.key === hovered)?.value)
-            : centerValue}
-        </div>
-        <div className="mt-0.5 text-xs text-slate-500 tabular-nums">
-          {hovered
-            ? `${((segments.find((s) => s.key === hovered).value / Math.max(1, total)) * 100).toFixed(1)}% of total`
-            : centerSub}
+        {/* Center label - absolutely positioned inside SVG wrapper only */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6 text-center">
+          <div className="text-[10px] md:text-[11px] font-bold uppercase tracking-widest text-slate-500">
+            {hovered ? segments.find((s) => s.key === hovered)?.label : centerLabel}
+          </div>
+          <div className="mt-1 text-xl md:text-2xl font-extrabold text-slate-900 tabular-nums leading-tight">
+            {hovered
+              ? formatAuto(segments.find((s) => s.key === hovered)?.value)
+              : centerValue}
+          </div>
+          <div className="mt-0.5 text-[11px] text-slate-500 tabular-nums">
+            {hovered
+              ? `${((segments.find((s) => s.key === hovered).value / Math.max(1, total)) * 100).toFixed(1)}% of total`
+              : centerSub}
+          </div>
         </div>
       </div>
 

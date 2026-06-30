@@ -101,3 +101,83 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Test the Position Size Calculator donut chart center label positioning fix. User reported that the center label (INVESTMENT, value, and % of capital) was rendering OUTSIDE/below the pie chart instead of inside it."
+
+frontend:
+  - task: "Donut Chart Center Label Positioning Fix"
+    implemented: true
+    working: true
+    file: "frontend/src/components/DonutChart.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "VERIFIED - Center label is now correctly positioned INSIDE the donut ring. Tested with default values (Portfolio 100000, Risk 2%, Entry 1500, Stop Loss 1450) - center label 'INVESTMENT' and value '₹60,000' are centered inside the donut. Tested with extreme values (Portfolio 60000) causing over-investment - center label remains inside. Hover interactions work correctly - label updates when hovering legend items while staying centered. Mobile viewport (390x844) displays correctly with center label inside. Fix implemented using 'absolute inset-0 flex flex-col items-center justify-center' CSS classes on line 112 of DonutChart.jsx."
+  
+  - task: "Hero Section Subtitle"
+    implemented: true
+    working: true
+    file: "frontend/src/components/Hero.jsx"
+    stuck_count: 0
+    priority: "low"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Verified - Hero subtitle correctly reads 'Calculate your ideal position size based on capital, risk, entry price, and stop loss.'"
+  
+  - task: "NumberInput Decimal Support"
+    implemented: true
+    working: true
+    file: "frontend/src/components/ui/number-input.jsx"
+    stuck_count: 0
+    priority: "low"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Verified - NumberInput accepts decimal values. Tested with 1500.55 in Entry Price field and value was accepted correctly."
+  
+  - task: "Scroll-Triggered Animations"
+    implemented: true
+    working: true
+    file: "frontend/src/components/Reveal.jsx"
+    stuck_count: 0
+    priority: "low"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Verified - Scroll animations trigger correctly when scrolling to different sections."
+  
+  - task: "Profit Targets Section Layout"
+    implemented: true
+    working: true
+    file: "frontend/src/components/ProfitTargets.jsx"
+    stuck_count: 0
+    priority: "low"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Verified - Both left and right columns render correctly. Column height difference is 1282px, which appears intentional as right column contains target cards grid plus summary table below, while left column is a single card with visualizer."
+
+metadata:
+  created_by: "testing_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: true
+
+test_plan:
+  current_focus:
+    - "Donut Chart Center Label Positioning Fix"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "testing"
+    message: "Testing completed successfully. PRIMARY BUG FIX VERIFIED: Donut chart center label is now correctly positioned INSIDE the donut ring, not outside/to the left as previously reported. Tested across multiple scenarios (default values, extreme values, hover interactions, mobile viewport) - all working correctly. All other page elements (Hero subtitle, decimal inputs, scroll animations, Profit Targets layout) also verified and working as expected. No issues found. Screenshots captured for visual verification."
