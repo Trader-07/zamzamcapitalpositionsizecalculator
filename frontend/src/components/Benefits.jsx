@@ -1,5 +1,6 @@
 import React from 'react';
 import { BENEFITS } from '../lib/mock';
+import Reveal from './Reveal';
 import { Lightbulb, ShieldCheck, GitBranch, Calculator, Settings2, Sparkles, Quote } from 'lucide-react';
 
 const ICONS = [ShieldCheck, GitBranch, Sparkles, Calculator, Settings2];
@@ -23,20 +24,21 @@ const Benefits = () => {
           {BENEFITS.map((b, i) => {
             const Icon = ICONS[i % ICONS.length];
             return (
-              <div
-                key={b.n}
-                className="group relative rounded-2xl bg-white border border-slate-100 p-6 md:p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden"
-              >
-                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-emerald-100/60 blur-2xl group-hover:bg-emerald-200/60 transition-colors" />
-                <div className="relative flex items-center gap-3 mb-3">
-                  <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 text-white grid place-items-center font-bold text-base shadow-md shadow-emerald-500/20">
-                    {b.n}
+              <Reveal key={b.n} delay={i * 80}>
+                <div
+                  className="group relative rounded-2xl bg-white border border-slate-100 p-6 md:p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden h-full"
+                >
+                  <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-emerald-100/60 blur-2xl group-hover:bg-emerald-200/60 transition-colors" />
+                  <div className="relative flex items-center gap-3 mb-3">
+                    <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 text-white grid place-items-center font-bold text-base shadow-md shadow-emerald-500/20">
+                      {b.n}
+                    </div>
+                    <h3 className="text-lg md:text-xl font-bold text-slate-900">{b.title}</h3>
+                    <Icon className="hidden md:block ml-auto w-5 h-5 text-emerald-500/60 group-hover:text-emerald-600 transition-colors" />
                   </div>
-                  <h3 className="text-lg md:text-xl font-bold text-slate-900">{b.title}</h3>
-                  <Icon className="hidden md:block ml-auto w-5 h-5 text-emerald-500/60 group-hover:text-emerald-600 transition-colors" />
+                  <p className="relative text-slate-600 leading-relaxed text-[15px]">{b.body}</p>
                 </div>
-                <p className="relative text-slate-600 leading-relaxed text-[15px]">{b.body}</p>
-              </div>
+              </Reveal>
             );
           })}
         </div>

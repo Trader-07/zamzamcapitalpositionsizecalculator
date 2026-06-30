@@ -46,7 +46,7 @@ const Hero = () => {
         </p>
 
         <p className="mt-5 max-w-2xl mx-auto text-base md:text-lg text-slate-600/90 leading-relaxed animate-fade-in-up" style={{ animationDelay: '220ms' }}>
-          Calculate your ideal position size based on capital, risk percentage, entry price, and stop loss.
+          Calculate your ideal position size based on capital, risk, entry price, and stop loss.
           Built for traders who value precision and ethical investing.
         </p>
 

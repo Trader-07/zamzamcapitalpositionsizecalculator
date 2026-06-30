@@ -1,5 +1,6 @@
 import React from 'react';
 import { SOCIAL_LINKS } from '../lib/mock';
+import Reveal from './Reveal';
 import { MessageCircle, Send, Instagram, Youtube, ArrowUpRight, Users } from 'lucide-react';
 import { cn } from '../lib/utils';
 
@@ -29,26 +30,27 @@ const Connect = () => {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-          {SOCIAL_LINKS.map((s) => {
+          {SOCIAL_LINKS.map((s, i) => {
             const Icon = ICONS[s.name];
             return (
-              <a
-                key={s.name}
-                href={s.href}
-                target="_blank"
-                rel="noreferrer"
-                className="group relative rounded-2xl bg-white border border-slate-100 p-6 md:p-7 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
-              >
-                <div className={cn('absolute -right-12 -top-12 h-32 w-32 rounded-full blur-2xl opacity-40 group-hover:opacity-70 transition-opacity bg-gradient-to-br', s.color)} />
-                <div className={cn('relative h-12 w-12 rounded-xl text-white grid place-items-center shadow-lg bg-gradient-to-br', s.color)}>
-                  <Icon className="w-6 h-6" />
-                </div>
-                <div className="relative mt-5 flex items-center justify-between">
-                  <h3 className="text-lg font-bold text-slate-900">{s.name}</h3>
-                  <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                </div>
-                <p className="relative mt-1.5 text-sm text-slate-500">{s.description}</p>
-              </a>
+              <Reveal key={s.name} delay={i * 80}>
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group relative block rounded-2xl bg-white border border-slate-100 p-6 md:p-7 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden h-full"
+                >
+                  <div className={cn('absolute -right-12 -top-12 h-32 w-32 rounded-full blur-2xl opacity-40 group-hover:opacity-70 transition-opacity bg-gradient-to-br', s.color)} />
+                  <div className={cn('relative h-12 w-12 rounded-xl text-white grid place-items-center shadow-lg bg-gradient-to-br', s.color)}>
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <div className="relative mt-5 flex items-center justify-between">
+                    <h3 className="text-lg font-bold text-slate-900">{s.name}</h3>
+                    <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  </div>
+                  <p className="relative mt-1.5 text-sm text-slate-500">{s.description}</p>
+                </a>
+              </Reveal>
             );
           })}
         </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ABOUT_FEATURES } from '../lib/mock';
+import Reveal from './Reveal';
 import { ShieldCheck, HeartHandshake, BookOpen, Sparkles, Award, BadgeCheck } from 'lucide-react';
 
 const FEATURE_ICONS = {
@@ -60,20 +61,19 @@ const About = () => {
 
           {/* RIGHT - 4 feature cards aligned in 2x2 grid */}
           <div className="lg:col-span-7 grid sm:grid-cols-2 gap-5 md:gap-6">
-            {ABOUT_FEATURES.map((f) => {
+            {ABOUT_FEATURES.map((f, i) => {
               const Icon = FEATURE_ICONS[f.key];
               return (
-                <div
-                  key={f.key}
-                  className="group relative rounded-2xl bg-white border border-slate-100 p-6 md:p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col"
-                >
-                  <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-emerald-100/50 blur-2xl group-hover:bg-emerald-200/60 transition-colors" />
-                  <div className="relative h-12 w-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 text-white grid place-items-center shadow-md shadow-emerald-500/20">
-                    <Icon className="w-6 h-6" />
+                <Reveal key={f.key} delay={i * 90}>
+                  <div className="group relative rounded-2xl bg-white border border-slate-100 p-6 md:p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col h-full">
+                    <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-emerald-100/50 blur-2xl group-hover:bg-emerald-200/60 transition-colors" />
+                    <div className="relative h-12 w-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 text-white grid place-items-center shadow-md shadow-emerald-500/20">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <h3 className="relative mt-4 text-lg font-bold text-slate-900">{f.title}</h3>
+                    <p className="relative mt-2 text-slate-600 text-sm leading-relaxed">{f.body}</p>
                   </div>
-                  <h3 className="relative mt-4 text-lg font-bold text-slate-900">{f.title}</h3>
-                  <p className="relative mt-2 text-slate-600 text-sm leading-relaxed">{f.body}</p>
-                </div>
+                </Reveal>
               );
             })}
           </div>
