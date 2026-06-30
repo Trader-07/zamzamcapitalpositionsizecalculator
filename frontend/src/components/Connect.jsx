@@ -24,7 +24,7 @@ const Connect = () => {
             Join Our <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">Community</span>
           </h2>
           <p className="mt-4 text-slate-600 max-w-2xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed px-2">
-            Follow Zamzam Capital across our social media platforms for our research, Q&amp;A sessions,
+            Follow Zamzam Capital across our social media platforms for our latest research, Q&amp;A sessions,
             Shariah compliance knowledge and updates.
           </p>
         </div>
@@ -54,6 +54,14 @@ const Connect = () => {
             );
           })}
         </div>
+
+        {/* Disclaimer below social icons */}
+        <Reveal delay={400} className="mt-10 sm:mt-12">
+          <p className="text-center max-w-4xl mx-auto italic text-[11px] sm:text-xs md:text-sm text-slate-500 leading-relaxed px-2">
+            Disclaimer: This calculator is for educational and informational purposes only. Stock market investments are subject to market risks.
+            Please read all related documents carefully before investing. Past performance is not indicative of future returns.
+          </p>
+        </Reveal>
       </div>
     </section>
   );

@@ -41,17 +41,18 @@ const Benefits = () => {
               </Reveal>
             );
           })}
-        </div>
 
-        <div className="mt-6 sm:mt-8 relative rounded-2xl md:rounded-3xl overflow-hidden bg-gradient-to-br from-emerald-600 to-teal-600 p-6 sm:p-8 md:p-10 text-white shadow-xl shadow-emerald-600/20">
-          <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:24px_24px]" />
-          <div className="relative flex items-start gap-3 sm:gap-4">
-            <div className="hidden sm:flex h-12 w-12 rounded-xl bg-white/15 grid place-items-center flex-shrink-0">
-              <Quote className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3">Conclusion</h3>
-              <p className="text-emerald-50/95 leading-relaxed text-sm sm:text-[15px] md:text-base">
+          {/* Conclusion - placed in the empty 6th grid cell, next to benefit #5 on md+ */}
+          <Reveal delay={BENEFITS.length * 80}>
+            <div className="relative h-full rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-600 to-teal-600 p-5 sm:p-6 md:p-7 text-white shadow-xl shadow-emerald-600/20">
+              <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:22px_22px]" />
+              <div className="relative flex items-start gap-3 mb-3">
+                <div className="h-10 w-10 sm:h-11 sm:w-11 flex-shrink-0 rounded-xl bg-white/15 grid place-items-center">
+                  <Quote className="w-5 h-5" />
+                </div>
+                <h3 className="text-base sm:text-lg md:text-xl font-bold self-center">Conclusion</h3>
+              </div>
+              <p className="relative text-emerald-50/95 leading-relaxed text-sm sm:text-[15px]">
                 A position size calculator is utilised to efficiently manage your risk in the markets.
                 It will show you exactly how many shares you should be trading, given your calculation of
                 risk and the amount you have in your account. Remember to always set your stop-loss below
@@ -59,7 +60,7 @@ const Benefits = () => {
                 strategy.
               </p>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

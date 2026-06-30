@@ -47,7 +47,7 @@ const Hero = () => {
 
         <p className="mt-4 max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-slate-600/90 leading-relaxed animate-fade-in-up px-2" style={{ animationDelay: '220ms' }}>
           Calculate your ideal position size based on capital, risk, entry price, and stop loss.
-          Built for traders who value precision and ethical investing.
+          Built for traders who value precision and ethical investing principles.
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 animate-fade-in-up" style={{ animationDelay: '300ms' }}>

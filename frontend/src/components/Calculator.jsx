@@ -143,13 +143,13 @@ const Calculator = () => {
 
   const utilMsg = overInvested
     ? `Reduce your risk % so that your Investment Amount [${formatINR(investment)}] does not exceed your Portfolio Size [${formatINR(portfolioSize || 0)}].`
-    : utilization > 75
-    ? 'High capital utilization. Consider reducing position size.'
-    : utilization > 50
-    ? 'Moderate utilization. Stay disciplined with your risk plan.'
-    : utilization > 0
-    ? 'Healthy capital utilization. Stick to your plan.'
-    : 'Enter valid inputs to see results.';
+    : !isValid
+    ? 'Enter valid inputs to see results.'
+    : utilization <= 20
+    ? 'Healthy capital utilization. Good risk management.'
+    : utilization <= 40
+    ? 'Moderate capital utilization. Manage risk carefully.'
+    : 'High capital utilization. Consider reducing position size.';
 
   const segments = [
     {
@@ -283,7 +283,8 @@ const Calculator = () => {
                 <Pill className={cn(
                   'border whitespace-nowrap',
                   overInvested ? 'bg-rose-50 text-rose-700 border-rose-100' :
-                  utilization > 75 ? 'bg-amber-50 text-amber-700 border-amber-100' :
+                  utilization > 40 ? 'bg-rose-50 text-rose-700 border-rose-100' :
+                  utilization > 20 ? 'bg-amber-50 text-amber-700 border-amber-100' :
                   'bg-emerald-50 text-emerald-700 border-emerald-100'
                 )}>
                   <Percent className="w-3.5 h-3.5" />
@@ -326,11 +327,12 @@ const Calculator = () => {
               <div className={cn(
                 'mt-5 flex items-start gap-2 rounded-xl px-3 sm:px-4 py-3 text-xs sm:text-sm font-medium border',
                 overInvested ? 'bg-rose-50 text-rose-700 border-rose-100' :
-                utilization > 75 ? 'bg-amber-50 text-amber-700 border-amber-100' :
-                utilization > 50 ? 'bg-emerald-50 text-emerald-700 border-emerald-100' :
-                'bg-slate-50 text-slate-700 border-slate-100'
+                !isValid ? 'bg-slate-50 text-slate-700 border-slate-100' :
+                utilization > 40 ? 'bg-rose-50 text-rose-700 border-rose-100' :
+                utilization > 20 ? 'bg-amber-50 text-amber-700 border-amber-100' :
+                'bg-emerald-50 text-emerald-700 border-emerald-100'
               )}>
-                {overInvested || utilization > 50 ? (
+                {overInvested || utilization > 20 ? (
                   <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 ) : (
                   <CheckCircle2 className="w-4 h-4 mt-0.5 flex-shrink-0" />

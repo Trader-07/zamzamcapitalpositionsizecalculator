@@ -1,0 +1,6 @@
+name = "zamzam-capital-position-size-calculator"
+compatibility_date = "2024-12-01"
+pages_build_output_dir = "frontend/build"
+
+# Local dev (run with: npx wrangler pages dev frontend/build --proxy 3000)
+# Add bindings here when you need KV / D1 / R2 / Secrets later.

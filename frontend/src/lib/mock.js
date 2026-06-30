@@ -45,7 +45,7 @@ export const ABOUT_FEATURES = [
   {
     key: 'sebi',
     title: 'SEBI Registered',
-    body: 'Research Analyst License No: INH000016199. Fully compliant with Indian regulatory standards.',
+    body: '100% compliant with regulatory standards allowing us to provide research on stocks to the public.',
   },
   {
     key: 'ethical',

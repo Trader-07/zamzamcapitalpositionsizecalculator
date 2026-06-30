@@ -72,11 +72,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-10 sm:mt-12 pt-5 sm:pt-6 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-[11px] sm:text-xs text-slate-500 max-w-3xl text-center md:text-left leading-relaxed">
-            Disclaimer: This calculator is for educational and informational purposes only. Stock market investments are subject to market risks; please read all related documents carefully before investing.
-          </p>
-          <p className="text-[11px] sm:text-xs text-slate-500 text-center md:text-right whitespace-nowrap">
+        <div className="mt-10 sm:mt-12 pt-5 sm:pt-6 border-t border-slate-800 flex items-center justify-center">
+          <p className="text-[11px] sm:text-xs text-slate-500 text-center whitespace-nowrap">
             © {new Date().getFullYear()} Zamzam Capital India • All rights reserved
           </p>
         </div>

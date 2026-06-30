@@ -33,7 +33,7 @@ const TargetCard = ({ ratio, targetPrice, profit, profitPct, isSelected, onClick
       )}
     >
       {isSelected && (
-        <span className="absolute -top-2 left-5 inline-flex items-center gap-1 bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-md">
+        <span className="absolute top-3 right-3 inline-flex items-center gap-1 bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-md tracking-wider">
           SELECTED
         </span>
       )}
@@ -50,7 +50,7 @@ const TargetCard = ({ ratio, targetPrice, profit, profitPct, isSelected, onClick
             <div className="text-base md:text-lg font-bold text-slate-900">1:{ratio} Ratio</div>
           </div>
         </div>
-        <TrendingUp className="w-5 h-5 text-emerald-600" />
+        {!isSelected && <TrendingUp className="w-5 h-5 text-emerald-600" />}
       </div>
       <div className="mt-5 space-y-2.5">
         <Row label="Target Price" value={<AnimatedNumber value={targetPrice} decimals={2} prefix="₹" />} />

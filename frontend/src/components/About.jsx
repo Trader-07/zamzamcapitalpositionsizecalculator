@@ -31,7 +31,6 @@ const About = () => {
               <p className="text-slate-700 leading-relaxed text-sm sm:text-[15px] md:text-base">
                 Zamzam Capital is a{' '}
                 <span className="font-bold text-slate-900">SEBI-registered Research Analyst firm</span>{' '}
-                <span className="font-bold text-emerald-700">(License No: INH000016199)</span>{' '}
                 that specializes in Shariah-compliant stock recommendations and portfolios in the Indian stock market.
               </p>
               <p className="mt-4 text-slate-700 leading-relaxed text-sm sm:text-[15px] md:text-base">
