@@ -1,0 +1,85 @@
+/* Reset App container styling: do NOT use text-align center */
+.App {
+  min-height: 100vh;
+}
+
+/* Smooth scroll for anchor navigation */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Page font */
+body {
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-feature-settings: 'ss01', 'cv11';
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+/* Custom keyframes */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.04); }
+}
+
+@keyframes pulse-slower {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(1.06); }
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+.animate-pulse-slower {
+  animation: pulse-slower 12s ease-in-out infinite;
+}
+
+/* Hide default number input spinners (we use text-based input) */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+/* Subtle selection color */
+::selection {
+  background: #a7f3d0;
+  color: #064e3b;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 8px;
+  border: 3px solid #f1f5f9;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
